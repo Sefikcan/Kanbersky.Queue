@@ -49,21 +49,6 @@ namespace Kanbersky.Queue.Consumer
             var connection = RabbitHelper.GetConnection;
             var channel = connection.CreateModel();
 
-            channel.ExchangeDeclare(
-                exchange: $"{typeof(CreateCustomerResponse).Name}{RabbitMQConstants.BaseExchangeName}",
-                type: ExchangeType.Direct,
-                durable: true, 
-                autoDelete: false, 
-                arguments: null
-                );
-
-            channel.QueueBind(
-                queue: $"{typeof(CreateCustomerResponse).Name}{RabbitMQConstants.BaseQueueName}",
-                exchange: $"{typeof(CreateCustomerResponse).Name}{RabbitMQConstants.BaseExchangeName}", 
-                routingKey: $"{typeof(CreateCustomerResponse).Name}{RabbitMQConstants.BaseRoutingKeyName}", 
-                arguments: null
-                );
-            
             channel.BasicQos(0, 1, false);
 
             var consumer = new EventingBasicConsumer(channel);
