@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kanbersky.Queue.Api", "Kanbersky.Queue.Api\Kanbersky.Queue.Api.csproj", "{B9FB2C91-2E05-4D86-B8A5-931584DBE178}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kanbersky.Queue.Consumer", "Kanbersky.Queue.Consumer\Kanbersky.Queue.Consumer.csproj", "{3D985FFA-70A8-420F-8209-48E9B89FB142}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{2C1719ED-E41C-4BA8-8235-57F8E59E65E3}"
+	ProjectSection(SolutionItems) = preProject
+		RabbitMQNotes.txt = RabbitMQNotes.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kanbersky.Queue.Core", "Kanbersky.Queue.Core\Kanbersky.Queue.Core.csproj", "{ECB58299-E431-4541-97A5-AD34009D4453}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kanbersky.Queue.Service", "Kanbersky.Queue.Service\Kanbersky.Queue.Service.csproj", "{832368A6-D25E-473E-BDAB-D455A58BDF56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kanbersky.Queue.Entities", "Kanbersky.Queue.Entities\Kanbersky.Queue.Entities.csproj", "{598909CA-722B-434D-A635-707907ADC509}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kanbersky.Queue.DAL", "Kanbersky.Queue.DAL\Kanbersky.Queue.DAL.csproj", "{02D5F06F-EA27-491A-9691-2E65F81C9BAC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9FB2C91-2E05-4D86-B8A5-931584DBE178}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9FB2C91-2E05-4D86-B8A5-931584DBE178}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9FB2C91-2E05-4D86-B8A5-931584DBE178}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9FB2C91-2E05-4D86-B8A5-931584DBE178}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D985FFA-70A8-420F-8209-48E9B89FB142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D985FFA-70A8-420F-8209-48E9B89FB142}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D985FFA-70A8-420F-8209-48E9B89FB142}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D985FFA-70A8-420F-8209-48E9B89FB142}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECB58299-E431-4541-97A5-AD34009D4453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECB58299-E431-4541-97A5-AD34009D4453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECB58299-E431-4541-97A5-AD34009D4453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECB58299-E431-4541-97A5-AD34009D4453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{832368A6-D25E-473E-BDAB-D455A58BDF56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{832368A6-D25E-473E-BDAB-D455A58BDF56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{832368A6-D25E-473E-BDAB-D455A58BDF56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{832368A6-D25E-473E-BDAB-D455A58BDF56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{598909CA-722B-434D-A635-707907ADC509}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{598909CA-722B-434D-A635-707907ADC509}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{598909CA-722B-434D-A635-707907ADC509}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{598909CA-722B-434D-A635-707907ADC509}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02D5F06F-EA27-491A-9691-2E65F81C9BAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D5F06F-EA27-491A-9691-2E65F81C9BAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D5F06F-EA27-491A-9691-2E65F81C9BAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D5F06F-EA27-491A-9691-2E65F81C9BAC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91746FE4-3F32-4F17-AB7B-0805D2632CA3}
+	EndGlobalSection
+EndGlobal

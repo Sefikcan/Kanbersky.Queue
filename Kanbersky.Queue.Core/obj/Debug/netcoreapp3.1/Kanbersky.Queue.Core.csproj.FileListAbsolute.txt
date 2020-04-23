@@ -1,0 +1,9 @@
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Core\bin\Debug\netcoreapp3.1\Kanbersky.Queue.Core.deps.json
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Core\bin\Debug\netcoreapp3.1\Kanbersky.Queue.Core.dll
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Core\bin\Debug\netcoreapp3.1\Kanbersky.Queue.Core.pdb
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Core\obj\Debug\netcoreapp3.1\Kanbersky.Queue.Core.AssemblyInfoInputs.cache
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Core\obj\Debug\netcoreapp3.1\Kanbersky.Queue.Core.AssemblyInfo.cs
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Core\obj\Debug\netcoreapp3.1\Kanbersky.Queue.Core.dll
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Core\obj\Debug\netcoreapp3.1\Kanbersky.Queue.Core.pdb
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Core\obj\Debug\netcoreapp3.1\Kanbersky.Queue.Core.csprojAssemblyReference.cache
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Core\obj\Debug\netcoreapp3.1\Kanbersky.Queue.Core.csproj.CoreCompileInputs.cache

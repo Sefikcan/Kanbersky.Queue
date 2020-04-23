@@ -1,0 +1,137 @@
+** Producer: Queue’ya mesaj gönderen uygulamadýr. Yani Publisher’ýmýz.
+** Consumer: Queue’daki mesajlarý dinleyecek olan uygulamamýzdýr.
+** RabbitMQ Queue’su FIFO(First in Frist out) mantýðýnda çalýþmaktadýr.
+** Mesajlar byte olarak gitmeli!! Bu sayede her bilgiyi gönderebilirsin.Image,text vs..
+** Message broker performansa dikkat etmez.Sadece ilgili mesajý iletir.Bizim yük daðýlýmýný rabbitmq'ya bildirmemiz gereklidir.
+** Kuyruk Ýþlemlerinin düzgün iþlemesi için aþaðýdaki 3 iþlemin düzgün þekilde iþlemesi gerekmektedir.
+   -> Message Durability: Veri kaybýnýn olmamasý
+   -> Message Acknowledgment: Ýlgili iþlemin doðru iþlenip iþlenmediði ile ilgili bilgilendirme yapýlmalýdýr.
+   -> Fair Dispact: Yoðun iþlemlerde yük daðýlýmýný consumer'lara eþit þekilde daðýtýlmasý gereklidir.
+
+** Exchange, Producer’dan gelen mesajý alýp isteðe baðlý olarak Queue’ye yönlendiren yapýdýr. Baþka bir deyiþ ile message routing agent diyebiliriz.
+
+** Fanout Exchange Tipi
+channel.ExchangeDeclare(exchange: "logs", durable:true, type: ExchangeType.Fanout);
+
+** Direct Exchange Tipi
+channel.ExchangeDeclare(exchange: "logs", durable: true, type: ExchangeType.Direct);
+
+** Topic Exchange Tipi
+channel.ExchangeDeclare(exchange: "logs", durable: true, type: ExchangeType.Topic);
+
+** Header Exchange Tipi
+channel.ExchangeDeclare(exchange: "logs", durable: true, type: ExchangeType.Headers);
+
+** Mesajý saðlama iþlemini yapýyoruz
+var properties = channel.CreateBasicProperties();
+properties.Persistent = true;
+
+** Mesajýmýzý belirlediðimiz content-type'a göre gönderebiliriz.(XML,JSON,Binary)
+var properties = channel.CreateBasicProperties();
+properties.ContentType = "application/json";
+
+** Mesajýmýz gönderilemez ise reject ederiz.
+model.BasicReject(deliveryArgs.DeliveryTag,false)
+
+** Mesajýmýz gönderilemez ise retry ederiz.
+model.BasicReject(deliveryArgs.DeliveryTag,true)
+Properties den retrycount'a göre iþlemleri yapabiliriz.
+
+** Header Exchange Tipi  Key-Value ekleme
+var properties = channel.CreateBasicProperties();
+Dictionary<string, object> headers = new Dictionary<string, object>
+{{ "format", "pdf" },{ "shape", "a4" }};
+properties.Headers = headers;
+
+------------------------------------------------ PUBLISHER  ------------------------------------------------------------
+
+** Aþaðýdaki kod bloðu RabbitMQ'da yeni bir channel yaratýr.
+var channel = connection.CreateModel()
+
+** Aþaðýdaki kod bloðu
+   -> Yeni bir queue tanýmlamamýzý saðlar.
+   -> Exchange tip kullanýlmadýðý durumlarda kullanýlýr.
+channel.QueueDeclare(queue:"hello",durable:true,exclusive:false,autoDelete: false,arguments: null);
+     -- QueueDeclare'in parametrelerinden bahsetmek gerekirse.
+        * queue     : Oluþturulacak olan Queue’nun ismi
+        * durable   : Bu parametre ile in-memory olarak çalýþan Queue disk üzerinden çalýþmaya baþlayacaktýr. Bu sayede RabbitMQ servisi dursa bile Queue kaybolmayacaktýr. Her güzelliðin getirdiði bir kötü tarafýn olduðu gibi bununda beraberinde getireceði gecikme problemi bulunmaktadýr haliyle. 
+        * exclusive : Ýlgili kuyruða birden fazla kanal üzerinden iþlem yapýlsýn mý yapýlmasýn mý bilgisini buradan yönetiyoruz.
+        * autodelete: Kuyruktaki verinin otomatik olarak silinip silinmemesini buradan yönetiyoruz.
+
+
+** Aþaðýdaki kod bloðunda Exchange tipi kullanmadýðýmýzda basicpublish'in kullanýmý yer alýr.
+** BasicPublish metodu ile verilerimizi rabbitmq kuyruðuna iletiriz.
+   channel.BasicPublish(exchange: "", routingKey: "hello", basicProperties: properties, body: bodyByte);
+        -- BasicPublish'in parametrelerinden bahsetmek gerekirse.
+           * exchange        : Exchange genel olarak mesajý ilgili Routing Key’e göre ilgili Queue’ya yönlendiren bölümdür. Direct Exchange, Fanout Exchange ve Topic Exchange gibi tipleri bulunmaktadýr.
+           * routingKey      : Burada girmiþ olduðumuz key’e göre ilgili Queue’ya yönlendirilecektir mesaj.
+           * basicProperties : Queue için özelliklerimizi bu parametrede gönderiyoruz.(Örn. mesajýn silinmemesinin kontrolü,persistent)
+           * body            : Queue’ya göndermek istediðimiz mesajý byte[] tipinde gönderiyoruz.
+
+------------------------------------------------ SUBSCRIBER  ------------------------------------------------------------
+
+** Exchange Tipleri:
+  - Direct Exchange: 
+   -> Default olan Exchange tipidir.
+   -> Mesaj Routing-Key bazlý olarak Queue’ya gönderir. 
+   -> Mesaj gönderildiði anda mesajýn header’ý ile gönderilen Routing -Key ile tüm Queue’lar taranýr ve mesaj, 
+   ilgili Routing-Key’e bind edilmiþ tüm Queue’lara iletilir. Bulmaz ise mesaj ignore edilir.
+
+  - Header Exchange
+   -> Gönderilen mesajdaki veriler key-value þeklinde gönderilir.Esnek bir yapýdýr.
+      x-match:any => gönderilen value'dan 1'inin eþleþmesi yeterli
+      x-match:all => Gönderilen tüm value'larýn eþleþmesi gerekir.
+
+  - Fanout Exchange
+   -> Mesajý bir exchange baðlý tüm queue’lara iletilen exchange tipidir. Bu exchange tipi ayný mesajýn birden fazla queue’ya iletilmesi ihtiyacý için uygundur. Örnek olarak oluþturulan sipariþin hazýrlanmasý için depo kuyruðuna iletilmesi ile birlikte kargo için bir kayýt açýlmasý için kargo kuyruðuna da eklenmesinin istenmesi gibi durumlarda kullanýlýr.Ayný bilgileri tüm consumer'lara gönderiyor.
+
+  - Topic Exchange
+   -> Gönderilen mesaj, header ile gönderilen Routing-Key’in Queue’nun bind edildiði Routing Pattern’e göre eþleþtirmesi ile Queue’ya iletilmesi saðlanýr. Belli patternelere göre mesajýn iletilmesi istenildiðinde kullanýlabilir.
+
+** Asýl iþlemlerimizi gerçekleþtiren kýsým Consumer'dir. 'EventingBasicConsumer' class’ý sayesinde constructor üzerinden     channel verildiðinde, 'Recevied' event’i sayesinde sürekli 'listening' modunda olacaktýr. Queue’daki ilgili mesajlarý     sýrasýyla almaktadýr ve 'Body' property’sinde barýndýrmaktadýr
+   var consumer = new EventingBasicConsumer(channel);
+
+** Aþaðýdaki kod queue'daki bilgiyi QueueName'e göre alma iþlemini yapar.
+   channel.BasicConsume(queue: queueName,autoAck: true, consumer: consumer);
+        -- BasicConsume'in parametrelerinden bahsetmek gerekirse.
+           * queue : Hangi Queue’nun mesajlarý alýnacak burada o queue'nun ismi olmalý.
+           * noAck : True olarak set edildiði taktirde, consumer mesajý aldýðý zaman otomatik olarak mesaj Queue’dan silinecektir. Eðer Queue üzerinden silinmesini istemiyor iseniz, False olarak set etmeniz gerekmektedir.
+
+** Random kuyruk ismi verir
+var queueName = channel.QueueDeclare().QueueName
+
+** Bind iþlemini gerçekleþtirir 
+channel.QueueBind(queueName, "logs", "", null);
+
+** direct exchange bind iþlemi
+foreach (var item in Enum.GetNames(typeof(LogNames)))
+{
+   channel.QueueBind(queue: queueName, exchange: "logs", routingKey: item);
+}
+
+** Topic Exchange bind iþlemi
+string routingKey = "Info.*.Warning";
+channel.QueueBind(queue: queueName, exchange: "logs", routingKey: routingKey);
+
+
+** Kayýt iþlemlerini 1'er 1'er eritmesini set ettik.global deðerinin false set edilmesinin sebebi her kuyruk için 1 deðerini almasýný set ettik.true dersek tüm kuyruklar toplam 1 adet veri almasýný saðlar.
+channel.BasicQos(0, 1, false);
+
+** Exchange Tipi kullanýlmaz ise bu kodu kullanýrýz
+Autoack : Deðeri true verirsek silme iþlemini otomatik olarak siler.
+False olarak verirsen bilgiyi bizim göndermemiz gerekli.
+channel.BasicConsume("hello", false, consumer);
+
+** Header Exchange Tipi
+channel.QueueDeclare("kuyruk1", false, false, false, null);
+Dictionary<string, object> headers = new Dictionary<string, object>
+{{ "format", "pdf" },{ "shape", "a4" },{ "x-match", "all" }};
+channel.QueueBind("kuyruk1", "logs", string.Empty, headers);
+
+** Listenin Ýþlemi Örneði
+consumer.Received += (model, ea) =>
+{
+var message = Encoding.UTF8.GetString(ea.Body);
+--> rabbitmq'ya mesajýn düzgün þekilde iþlendiðini bildiriliyor ve rabbitmq ilgili kaydý kuyruktan silecek.
+channel.BasicAck(ea.DeliveryTag, false);
+}; 

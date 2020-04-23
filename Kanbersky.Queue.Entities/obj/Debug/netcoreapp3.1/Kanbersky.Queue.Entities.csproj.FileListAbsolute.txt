@@ -1,0 +1,12 @@
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Entities\bin\Debug\netcoreapp3.1\Kanbersky.Queue.Entities.deps.json
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Entities\bin\Debug\netcoreapp3.1\Kanbersky.Queue.Entities.dll
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Entities\bin\Debug\netcoreapp3.1\Kanbersky.Queue.Entities.pdb
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Entities\bin\Debug\netcoreapp3.1\Kanbersky.Queue.Core.dll
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Entities\bin\Debug\netcoreapp3.1\Kanbersky.Queue.Core.pdb
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Entities\obj\Debug\netcoreapp3.1\Kanbersky.Queue.Entities.csprojAssemblyReference.cache
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Entities\obj\Debug\netcoreapp3.1\Kanbersky.Queue.Entities.csproj.CoreCompileInputs.cache
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Entities\obj\Debug\netcoreapp3.1\Kanbersky.Queue.Entities.AssemblyInfoInputs.cache
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Entities\obj\Debug\netcoreapp3.1\Kanbersky.Queue.Entities.AssemblyInfo.cs
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Entities\obj\Debug\netcoreapp3.1\Kanbersky.Queue.Entities.csproj.CopyComplete
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Entities\obj\Debug\netcoreapp3.1\Kanbersky.Queue.Entities.dll
+D:\WorkSpaces\RabbitMQ\Kanbersky.Queue\Kanbersky.Queue.Entities\obj\Debug\netcoreapp3.1\Kanbersky.Queue.Entities.pdb
